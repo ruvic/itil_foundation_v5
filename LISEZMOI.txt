@@ -1,0 +1,28 @@
+ITIL 5 Foundation - version PWA (application web installable)
+==============================================================
+
+Contenu du dossier (a deployer tel quel, tous les fichiers ensemble) :
+  index.html             l'application complete
+  manifest.webmanifest   description de l'application (nom, icones, couleurs)
+  sw.js                  service worker : mise en cache pour un usage hors ligne
+  icons/                 icones de l'application (ecran d'accueil, splash)
+
+Deploiement :
+  1. Copiez l'integralite de ce dossier sur votre hebergement (a la racine du site
+     ou dans un sous-dossier, par exemple https://monsite.com/itil5/).
+  2. Le site doit etre servi en HTTPS (obligatoire pour l'installation et le hors ligne).
+     GitHub Pages, Netlify, Vercel, Cloudflare Pages le font par defaut.
+  3. Ouvrez l'adresse sur le telephone :
+       - Android (Chrome) : menu "..." puis "Installer l'application"
+         ou "Ajouter a l'ecran d'accueil" ; un bouton "Installer" apparait aussi
+         dans Reglages > Installer sur mon telephone.
+       - iPhone (Safari) : bouton Partager puis "Sur l'ecran d'accueil".
+  4. Apres une premiere ouverture en ligne, l'application fonctionne sans connexion.
+
+Mise a jour :
+  Remplacez les fichiers par la nouvelle version ; a l'ouverture suivante,
+  un message "Nouvelle version disponible - Recharger" s'affiche.
+
+La progression (lectures, quiz, examens, statuts des flashcards) est enregistree
+dans le navigateur du telephone. Utilisez Reglages > Sauvegarder ma progression
+pour la transferer vers un autre appareil.

@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#9d1d2a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a222e" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ITIL 5">
+<meta name="description" content="Révision et préparation à l'examen ITIL 5 Foundation : cours, quiz, flashcards, examens blancs.">
 <title>Révision ITIL 5 Foundation</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,12 +83,34 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .top nav{display:none}
   .bottom{display:flex}
 }
-.bottom{display:none;position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));justify-content:flex-start;gap:2px;overflow-x:auto;scrollbar-width:none;z-index:9}
+.bottom{display:flex;position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));justify-content:space-around;gap:2px;z-index:9}
 .bottom::-webkit-scrollbar{display:none}
-.bottom .tab{flex:none;min-width:58px}
+.bottom .tab{flex:1;min-width:0}
 .bottom .tab{font-size:.72rem;padding:5px 6px;display:flex;flex-direction:column;align-items:center;gap:2px}
 .bottom .tab svg{width:20px;height:20px}
-@media (max-width:860px){.main{padding-bottom:90px}}
+@media (max-width:860px){
+  .main{padding-bottom:96px;padding-block-start:14px}
+  h1{font-size:1.35rem}h2{font-size:1.15rem}
+  body{font-size:15px}
+  .card{padding:13px 14px}
+  .stat b{font-size:1.4rem}
+  .brand{font-size:.95rem}.brand small{font-size:.68rem}
+  .top{padding-block:6px}
+  .list .item{padding:9px 10px;gap:8px}
+  .num{width:28px}
+  .lesson table{font-size:.84rem}.lesson th,.lesson td{padding:5px 6px}
+  .sec-nav .btn{flex:1;justify-content:center;text-align:center;font-size:.82rem}
+  .choice{padding:9px 10px}
+  .qnav button{width:28px;height:26px;font-size:.7rem}
+  .score-big{font-size:2.4rem}
+  .retenir{padding:10px 12px}
+  .row > .btn{flex-grow:0}
+  .top .brand{margin-right:auto}
+  .install-btn{display:inline-flex}
+}
+.bottom .tab.on{color:var(--accent)}
+.bottom .tab{color:var(--muted);background:transparent}
+.install-btn{display:none}
 
 .eyebrow{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
@@ -213,6 +245,12 @@ textarea{width:100%;min-height:90px;font:inherit;font-size:.8rem;padding:8px;bor
 .weak li{margin:.3em 0}
 .kbd{font-size:.75rem;border:1px solid var(--line);border-radius:4px;padding:0 5px;color:var(--muted)}
 
+.more{position:fixed;left:8px;right:8px;bottom:calc(66px + env(safe-area-inset-bottom,0px));background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;z-index:9;display:flex;flex-direction:column}
+.more .tab{text-align:left;padding:11px 12px;font-size:.95rem;border-radius:8px}
+.more .tab.on{background:var(--accent-soft);color:var(--accent)}
+@media (min-width:861px){.more{display:none!important}.bottom{display:none!important}}
+.bottom .tab.more-on{color:var(--accent)}
+
 </style>
 <style>html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
 </head>
@@ -241,12 +279,15 @@ textarea{width:100%;min-height:90px;font:inherit;font-size:.8rem;padding:8px;bor
   <button class="tab" data-view="cours"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>Cours</button>
   <button class="tab" data-view="entrainement"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>Entraîner</button>
   <button class="tab" data-view="examen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>Examen</button>
-  <button class="tab" data-view="formateur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M7 3h14v12"/></svg>Formateur</button>
-  <button class="tab" data-view="glossaire"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h13"/></svg>Glossaire</button>
-  <button class="tab" data-view="syntheses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h12v16H8zM4 8h4M4 12h4M4 16h4"/></svg>Fiches</button>
-  <button class="tab" data-view="planning"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Planning</button>
-  <button class="tab" data-view="reglages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Réglages</button>
+  <button class="tab" id="more-btn" aria-expanded="false" aria-controls="more-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>Plus</button>
 </nav>
+<div class="more" id="more-menu" hidden>
+  <button class="tab" data-view="formateur">Flashcards formateur</button>
+  <button class="tab" data-view="glossaire">Glossaire</button>
+  <button class="tab" data-view="syntheses">Fiches de synthèse</button>
+  <button class="tab" data-view="planning">Planning de révision</button>
+  <button class="tab" data-view="reglages">Réglages &amp; installation</button>
+</div>
 <script>
 /* ===== MODULE A : LES PRATIQUES ITIL 5 ===== */
 const MODULE_A = {
@@ -2628,10 +2669,12 @@ function renderPlanner(el){
 function renderSettings(el){
   el.innerHTML = `<div class="wrap"><div class="eyebrow">Réglages</div><h1>Réglages et sauvegarde</h1>
   <div class="card"><h4 style="margin-top:0">Apparence</h4><div class="row"><label>Thème <select id="theme"><option value="">Système</option><option value="light">Clair</option><option value="dark">Sombre</option></select></label></div></div>
+  <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Installer sur mon téléphone (PWA)</h4><p class="muted">L'application peut être installée comme une appli native : icône sur l'écran d'accueil, plein écran, et fonctionnement hors ligne une fois chargée.</p><button class="btn primary" id="install" hidden>Installer l'application</button><p class="muted" id="installinfo" style="margin:8px 0 0"></p></div>
   <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Sauvegarder ma progression</h4><p class="muted">Votre progression est enregistrée automatiquement dans ce navigateur. Pour la transférer sur un autre appareil ou la conserver, copiez le code ci-dessous et collez-le sur l'autre appareil.</p><div class="row"><button class="btn primary" id="exp">Générer le code de sauvegarde</button><button class="btn" id="copy" hidden>Copier</button></div><textarea id="expbox" hidden readonly aria-label="Code de sauvegarde"></textarea></div>
   <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Restaurer une progression</h4><textarea id="impbox" placeholder="Collez ici un code de sauvegarde"></textarea><div class="row" style="margin-top:8px"><button class="btn" id="imp">Restaurer</button></div></div>
   <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Réinitialiser</h4><p class="muted">Efface toute la progression (lectures, quiz, examens, cartes). Action irréversible.</p><button class="btn" id="reset" style="border-color:var(--bad);color:var(--bad)">Tout effacer</button><span id="resetc"></span></div>
   <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Contenu</h4><p class="muted">${SECTIONS.length} sections · ${TRAINER_DECKS.reduce((a, d) => a + d.cards.length, 0)} flashcards du formateur · ${Q.length} QCM d'entraînement · ${EXAMS.length} examens blancs fixes (${EXAMS.reduce((a, e) => a + e.items.length, 0)} questions) · ${TF.length} vrai/faux · ${CARDS.length} flashcards · ${MATCHING.length} exercices d'association · ${GLOSSARY.length} termes. Contenu rédigé à partir des supports « Les pratiques ITIL 5 » et « ITIL V5 Foundation : la démarche » (AFConsulting Group, 2027).</p></div></div>`;
+  const ib = $('#install'); if (ib) { if (window.__installPrompt) { ib.hidden = false; ib.addEventListener('click', async () => { const p = window.__installPrompt; if (!p) return; p.prompt(); await p.userChoice; window.__installPrompt = null; ib.hidden = true; }); } else if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) { $('#installinfo').textContent = 'Application installée : vous l\'utilisez en mode autonome.'; } else { $('#installinfo').textContent = 'Pour installer : sur Android (Chrome), menu ⋮ puis « Ajouter à l\'écran d\'accueil » ou « Installer l\'application » ; sur iPhone (Safari), bouton Partager puis « Sur l\'écran d\'accueil ».'; } }
   $('#theme').value = S.theme; $('#theme').addEventListener('change', e => { S.theme = e.target.value; save(); applyTheme(); });
   $('#exp').addEventListener('click', () => { const b = $('#expbox'); b.value = btoa(unescape(encodeURIComponent(JSON.stringify(S)))); b.hidden = false; $('#copy').hidden = false; b.select(); });
   $('#copy').addEventListener('click', () => { const b = $('#expbox'); b.select(); const t = b.value; if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(() => toast('Copié'), () => toast('Sélectionnez puis copiez le texte')); else toast('Sélectionnez puis copiez le texte'); });
@@ -2704,13 +2747,23 @@ function renderTrainerCards(el, arg){
 /* ---------- démarrage ---------- */
 document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => { if (location.hash === '#' + b.dataset.view) route(); else location.hash = '#' + b.dataset.view; }));
 $('.menu-btn').addEventListener('click', () => $('.side').classList.toggle('open'));
+const moreBtn = $('#more-btn'), moreMenu = $('#more-menu');
+moreBtn.addEventListener('click', () => { moreMenu.hidden = !moreMenu.hidden; moreBtn.setAttribute('aria-expanded', String(!moreMenu.hidden)); });
+window.addEventListener('hashchange', () => { moreMenu.hidden = true; moreBtn.setAttribute('aria-expanded', 'false'); const v = topViewOf((location.hash || '#home').slice(1).replace(/-.*$/, '')); moreBtn.classList.toggle('more-on', ['formateur','glossaire','syntheses','planning','reglages'].includes(v)); });
+document.addEventListener('click', e => { if (!e.target.closest('#more-menu') && !e.target.closest('#more-btn')) { moreMenu.hidden = true; moreBtn.setAttribute('aria-expanded', 'false'); } });
 $('.side').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) location.hash = '#' + b.dataset.go; });
 document.addEventListener('click', e => { const a = e.target.closest('a[href^="#"]'); if (a && a.getAttribute('href') === location.hash) { e.preventDefault(); route(); } });
 document.addEventListener('click', e => { if (window.innerWidth <= 860 && !e.target.closest('.side') && !e.target.closest('.menu-btn')) $('.side').classList.remove('open'); });
 route();
+window.dispatchEvent(new Event('hashchange'));
 })();
 
 </script>
 
+<script>
+window.__installPrompt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); window.__installPrompt = e; const b = document.getElementById('install'); if (b) b.hidden = false; });
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').then(reg => { reg.addEventListener('updatefound', () => { const nw = reg.installing; nw && nw.addEventListener('statechange', () => { if (nw.state === 'installed' && navigator.serviceWorker.controller) { const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = 'Nouvelle version disponible. <button class="btn small" style="margin-left:8px">Recharger</button>'; t.querySelector('button').onclick = () => location.reload(); document.body.appendChild(t); } }); }); }).catch(() => {}); }); }
+</script>
 </body>
 </html>

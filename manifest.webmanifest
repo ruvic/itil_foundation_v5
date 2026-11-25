@@ -1,0 +1,32 @@
+{
+ "name": "Révision ITIL 5 Foundation",
+ "short_name": "ITIL 5",
+ "description": "Cours, quiz, flashcards et examens blancs pour préparer la certification ITIL 5 Foundation.",
+ "start_url": "./index.html",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#f3f5f8",
+ "theme_color": "#9d1d2a",
+ "lang": "fr",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
