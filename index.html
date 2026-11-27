@@ -263,7 +263,7 @@ textarea{width:100%;min-height:90px;font:inherit;font-size:.8rem;padding:8px;bor
     <button class="tab" data-view="cours">Cours</button>
     <button class="tab" data-view="entrainement">Entraînement</button>
     <button class="tab" data-view="examen">Examen blanc</button>
-    <button class="tab" data-view="formateur">Flashcards formateur</button>
+    <button class="tab" data-view="formateur">Formateur</button>
     <button class="tab" data-view="glossaire">Glossaire</button>
     <button class="tab" data-view="syntheses">Synthèses</button>
     <button class="tab" data-view="planning">Planning</button>
@@ -282,7 +282,7 @@ textarea{width:100%;min-height:90px;font:inherit;font-size:.8rem;padding:8px;bor
   <button class="tab" id="more-btn" aria-expanded="false" aria-controls="more-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>Plus</button>
 </nav>
 <div class="more" id="more-menu" hidden>
-  <button class="tab" data-view="formateur">Flashcards formateur</button>
+  <button class="tab" data-view="formateur">Formateur</button>
   <button class="tab" data-view="glossaire">Glossaire</button>
   <button class="tab" data-view="syntheses">Fiches de synthèse</button>
   <button class="tab" data-view="planning">Planning de révision</button>
@@ -2276,6 +2276,28 @@ const TRAINER_DECKS = [
 ]}
 ];
 
+/* ===== QUIZ DU FORMATEUR (AFConsulting Group) =====
+ Questions et choix : document du formateur. Réponses et explications : rédigées à partir du support de cours. */
+const TRAINER_QUIZZES = [
+{ id: 'TQ1', title: 'Quiz d\'entraînement rapide : Module 1, Termes et définitions clés', file: '1. Quiz Entraînement Rapide ITIL5 Termes Définitions.pdf', duration: 20, pass: 10, level: 'Niveau BL1 / BL2', questions: [
+['B2-1','Définition de la valeur. Comment le référentiel ITIL® 5 définit-il la notion de « valeur » ?',['Le montant financier facturé au client pour l\'utilisation d\'un service numérique.','Les bénéfices perçus, l\'utilité et l\'importance d\'une chose pour une partie prenante.','L\'ensemble des ressources techniques nécessaires pour maintenir un produit en ligne.','La réduction maximale des coûts d\'exploitation informatique sur un exercice annuel.'],1,'La valeur est l\'importance, l\'utilité ou les bénéfices perçus d\'un produit ou service ; elle dépend de la perception de la partie prenante, pas du prix facturé ni des coûts.'],
+['B2-3','Produit numérique vs Service numérique. Quelle affirmation décrit le mieux la relation entre un « produit » et un « service » dans ITIL® 5 ?',['Un produit est uniquement matériel, tandis qu\'un service est exclusivement logiciel.','Un produit est une configuration de ressources créée par une organisation qui peut offrir de la valeur potentielle, activée par des offres de services.','Un service remplace totalement la notion de produit dans la gestion moderne des systèmes d\'information.','Un produit est géré par les équipes de support, alors qu\'un service relève uniquement du marketing.'],1,'Le produit est la configuration de ressources (logiciel, plateforme, API, données) porteuse de valeur potentielle ; cette valeur est rendue au consommateur par des offres de services. ITIL 5 gère les deux de bout en bout (DPSM).'],
+['B2-1','Co-création de valeur. Qu\'implique le concept de « co-création de valeur » entre un fournisseur et un consommateur ?',['Le fournisseur garantit la valeur seul, indépendamment des actions de l\'utilisateur.','La valeur est créée conjointement grâce à une collaboration active entre le fournisseur, le consommateur et les autres parties prenantes.','Le consommateur doit développer lui-même l\'infrastructure technique du service.','La valeur n\'existe que lorsque deux fournisseurs fusionnent leurs catalogues de services.'],1,'La valeur n\'est pas livrée « prête à l\'emploi » : elle est générée conjointement par une collaboration active et continue entre fournisseur, consommateur et parties prenantes.'],
+['B2-1','Sortie (Output) vs Résultat (Outcome). Une équipe informatique déploie un nouveau portail de réservation en ligne permettant aux clients de réserver leurs billets 24h/24 sans attendre au téléphone. Dans cet exemple, que représente la capacité des clients à réserver sans attente ?',['Une sortie (Output).','Un résultat (Outcome).','Un coût caché.','Une exigence de conformité.'],1,'Le portail déployé est l\'output (livrable) ; la capacité des clients à réserver sans attendre est le résultat obtenu pour la partie prenante, donc l\'outcome.'],
+['B2-2','Utilité (Utility) et Garantie (Warranty). Quelle combinaison permet à un produit ou service numérique de faciliter les résultats souhaités par un consommateur ?',['L\'utilité (« adapté à l\'usage ») et la garantie (« adapté à l\'utilisation »).','Le budget prévisionnel et le contrat de sous-traitance.','L\'incident majeur et l\'erreur connue.','L\'automatisation complète et la suppression des contrôles humains.'],0,'Utilité (fit for purpose : ce que fait le produit) et garantie (fit for use : disponibilité, sécurité, continuité, capacité) sont indissociables pour créer de la valeur ; ITIL 5 y ajoute l\'expérience et la durabilité.'],
+['B2-3','Rôles des parties prenantes. Quel rôle désigne spécifiquement la personne qui autorise le budget pour la consommation d\'un service ?',['L\'utilisateur (User).','Le client (Customer).','Le sponsor (Sponsor).','Le fournisseur (Service Provider).'],2,'Le sponsor autorise le budget ; le client définit les exigences et porte la responsabilité des résultats ; l\'utilisateur interagit avec le service au quotidien.'],
+['B4-6','Définition du Risque. Dans le vocabulaire officiel ITIL® 5, comment définit-on un « risque » ?',['Un événement passé ayant déjà provoqué une interruption de service.','Un événement possible qui pourrait causer un préjudice ou une perte, ou rendre plus difficile l\'atteinte des objectifs.','Le montant total des investissements nécessaires pour lancer un produit.','Une demande standardisée de réinitialisation de mot de passe.'],1,'Un risque est un événement possible (incertain) susceptible de causer un préjudice, une perte ou de compliquer l\'atteinte des objectifs. Un événement passé ayant interrompu un service est un incident, pas un risque. La gestion des risques définit l\'appétence au risque pour la gouvernance.'],
+['B4-1','Système de Valeur ITIL (IVS). Quel est l\'objectif principal du Système de Valeur ITIL (IVS) ?',['Remplacer tous les processus agiles par des validations hiérarchiques strictes.','Garantir que l\'organisation co-crée continuellement de la valeur avec toutes les parties prenantes grâce à l\'utilisation et à la gestion des produits et services.','Limiter l\'accès aux outils numériques aux seuls administrateurs système.','Mesurer uniquement la performance financière trimestrielle du département IT.'],1,'Le SVS décrit comment toutes les composantes de l\'organisation fonctionnent ensemble pour transformer opportunité et demande en valeur co-créée avec les parties prenantes.'],
+['B3-0','Les 4 Dimensions. Laquelle des propositions suivantes NE fait PAS partie des 4 dimensions de la gestion des produits et des services dans ITIL® 5 ?',['Organisations et personnes.','Information et technologie.','Partenaires et fournisseurs.','Infrastructures matérielles et réseaux locaux.'],3,'Les quatre dimensions sont : Organisations et personnes ; Information et technologie ; Partenaires et fournisseurs ; Flux de valeur et processus. Les infrastructures relèvent de la dimension Information et technologie, elles ne constituent pas une dimension.'],
+['A3-2','Incident vs Problème. Quelle est la différence fondamentale entre un « incident » et un « problème » ?',['Un incident est la cause d\'un ou plusieurs problèmes.','Un incident est une interruption non planifiée ou une réduction de la qualité d\'un service, tandis qu\'un problème est la cause ou la cause potentielle d\'un ou plusieurs incidents.','Un incident concerne uniquement les logiciels, alors qu\'un problème concerne uniquement le matériel.','Un incident est toujours résolu par un changement majeur, contrairement à un problème.'],1,'L\'incident est l\'événement qui dégrade ou interrompt le service (à rétablir vite) ; le problème est la cause, connue ou inconnue, d\'un ou plusieurs incidents (à analyser). C\'est le problème qui est la cause des incidents, pas l\'inverse.'],
+['A3-2','Erreur connue (Known Error). Qu\'est-ce qu\'une « erreur connue » dans le référentiel ITIL ?',['Un incident qui n\'a pas encore été signalé au centre de services.','Un problème qui a été analysé mais qui n\'a pas encore été résolu.','Une demande de changement rejetée par l\'autorité des changements.','Un dysfonctionnement causé volontairement lors d\'un test de sécurité.'],1,'Une erreur connue est un problème dont la cause a été identifiée (analysé) et pour lequel une solution, temporaire ou définitive, existe mais n\'est pas encore mise en œuvre : le problème n\'est pas encore résolu.'],
+['A1-3','Définition d\'un Changement (Change). Comment ITIL® 5 définit-il un « changement » ?',['L\'ajout, la modification ou la suppression de tout élément susceptible d\'avoir un effet direct ou indirect sur les produits ou services.','Le remplacement annuel obligatoire de tous les postes de travail de l\'entreprise.','Une plainte officielle formulée par un client insatisfait.','La mise à jour automatique des tarifs d\'un fournisseur externe.'],0,'Un changement est l\'ajout, la modification ou le retrait de tout élément (CI) pouvant avoir un effet direct ou indirect sur les produits ou services. Tout changement est formalisé par une RFC.'],
+['B2-7','Modèle de Cycle de Vie (PSLM). Dans ITIL® 5, quel modèle remplace la chaîne de valeur à 6 activités d\'ITIL 4 pour couvrir l\'ensemble du cycle de vie des produits et services numériques ?',['Le modèle en cascade (Waterfall).','Le Modèle de Cycle de Vie des Produits et Services (PSLM) en 8 étapes.','La matrice RACI simplifiée.','Le cycle PDCA uniquement.'],1,'Le PSLM (Product and Service Lifecycle Management) en 8 activités (Découvrir, Concevoir, Acquérir, Construire, Transitionner, Exploiter, Livrer, Supporter) remplace la chaîne de valeur à 6 activités d\'ITIL 4.'],
+['B4-3','Approche AI-Native et Gouvernance IA. Quel principe fondamental encadre l\'utilisation de l\'Intelligence Artificielle (approche AI-Native) dans ITIL® 5 ?',['L\'IA doit prendre toutes les décisions critiques sans aucune intervention humaine.','L\'IA soutient les capacités opérationnelles (modèle 6C) tout en restant soumise à la gouvernance, à la transparence et à la responsabilité humaine.','L\'IA ne doit être utilisée que pour la rédaction de rapports financiers.','L\'utilisation de l\'IA dispense l\'organisation de gérer les risques liés aux données.'],1,'Le modèle 6C classifie les capacités de l\'IA ; les trois règles d\'or de la gouvernance de l\'IA sont la responsabilité humaine, la transparence/explicabilité et la conformité aux régulations.'],
+['B2-5','Experience Level Agreement (XLA). Pourquoi ITIL® 5 accorde-t-il une place centrale à la gestion de l\'expérience (Experience Management) en complément des SLA ?',['Parce que les indicateurs techniques (SLA) peuvent être au vert alors que l\'expérience vécue par l\'utilisateur reste insatisfaisante.','Parce que les SLA sont devenus illégaux dans les contrats informatiques.','Parce que l\'expérience utilisateur ne nécessite aucune mesure ni suivi.','Parce que les XLA remplacent totalement la gestion financière des services.'],0,'C\'est l\'« effet Pastèque » : SLA au vert, expérience au rouge. Les XLA complètent les SLA (ils ne les remplacent pas) en mesurant le ressenti et la satisfaction réels.']
+]}
+];
+
 /* ===== MOTEUR DE L'APPLICATION ===== */
 (function(){
 'use strict';
@@ -2301,7 +2323,7 @@ const CHEAT_PART = q => { const p = EXAM_POOLS.find(p => p.test(q)); return p ? 
 /* ---------- état ---------- */
 const KEY = 'itil5-prep-v1';
 let S = load();
-function fresh(){ return { read:{}, mastery:{}, quiz:{}, secquiz:{}, qstats:{}, cards:{}, exams:[], examDate:'', last:'', theme:'', trainer:{} }; }
+function fresh(){ return { read:{}, mastery:{}, quiz:{}, secquiz:{}, qstats:{}, cards:{}, exams:[], examDate:'', last:'', theme:'', trainer:{}, tquiz:{} }; }
 function load(){ try { const r = localStorage.getItem(KEY); if (r) return Object.assign(fresh(), JSON.parse(r)); } catch(e){} return fresh(); }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
 function applyTheme(){ const r = document.documentElement; if (S.theme) r.setAttribute('data-theme', S.theme); else r.removeAttribute('data-theme'); }
@@ -2335,18 +2357,18 @@ const VIEWS = { home: renderHome, cours: renderCourse, entrainement: renderTrain
 function route(){
   const h = (location.hash || '#home').slice(1);
   let view = h, arg = null;
-  const m = h.match(/^(sec|chap|quiz|cards|match|vf|tdeck|tcards)-(.+)$/);
+  const m = h.match(/^(sec|chap|quiz|cards|match|vf|tdeck|tcards|tquiz)-(.+)$/);
   if (m) { view = m[1]; arg = m[2]; }
   if (view === 'sec' || view === 'chap') { S.last = h; save(); }
   document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.view === topViewOf(view)));
   const main = $('#main'); main.innerHTML = '';
   $('.side').classList.remove('open');
-  const fn = { sec: renderSection, chap: renderChapter, quiz: renderQuiz, cards: renderCards, match: renderMatch, vf: renderTF, tdeck: renderTrainerDeck, tcards: renderTrainerCards }[view] || VIEWS[view] || renderHome;
+  const fn = { sec: renderSection, chap: renderChapter, quiz: renderQuiz, cards: renderCards, match: renderMatch, vf: renderTF, tdeck: renderTrainerDeck, tcards: renderTrainerCards, tquiz: renderTrainerQuiz }[view] || VIEWS[view] || renderHome;
   fn(main, arg);
   renderSide(view, arg);
   window.scrollTo({ top: 0 });
 }
-function topViewOf(v){ if (['tdeck','tcards'].includes(v)) return 'formateur'; if (['sec','chap','cours'].includes(v)) return 'cours'; if (['quiz','cards','match','vf','entrainement'].includes(v)) return 'entrainement'; return v; }
+function topViewOf(v){ if (['tdeck','tcards','tquiz'].includes(v)) return 'formateur'; if (['sec','chap','cours'].includes(v)) return 'cours'; if (['quiz','cards','match','vf','entrainement'].includes(v)) return 'entrainement'; return v; }
 window.addEventListener('hashchange', route);
 
 /* ---------- barre latérale ---------- */
@@ -2459,7 +2481,7 @@ function failedQuestions(){ return Q.filter(q => S.qstats[q.id] && S.qstats[q.id
 
 /* QCM générique : config {title, sub, questions, onDone(score,total,details), backHash, showSecLink} */
 function runQuiz(el, cfg){
-  const qs = cfg.questions.map(q => { const order = shuffle([0, 1, 2, 3]); return { q, order, sel: null }; });
+  const qs = cfg.questions.map(q => { const order = cfg.keepOrder ? [0, 1, 2, 3] : shuffle([0, 1, 2, 3]); return { q, order, sel: null }; });
   let i = 0; const total = qs.length;
   const render = () => {
     const it = qs[i]; const q = it.q; const answered = it.sel !== null; const ok = answered && it.order[it.sel] === q.answer;
@@ -2477,9 +2499,9 @@ function runQuiz(el, cfg){
     const score = qs.filter(x => x.sel !== null && x.order[x.sel] === x.q.answer).length;
     const wrong = qs.filter(x => x.sel === null || x.order[x.sel] !== x.q.answer);
     cfg.onDone && cfg.onDone(score, total, qs);
-    const p = pct(score, total);
+    const p = pct(score, total); const passN = cfg.passScore || Math.ceil(total * 0.65);
     el.innerHTML = `<div class="wrap"><div class="crumbs"><a href="#${cfg.backHash}">← ${esc(cfg.backLabel || 'Retour')}</a></div><h2>${esc(cfg.title)} : résultat</h2>
-    <div class="card" style="text-align:center"><div class="score-big" style="color:${p >= 65 ? 'var(--ok)' : 'var(--bad)'}">${p} %</div><p>${score} bonne${score > 1 ? 's' : ''} réponse${score > 1 ? 's' : ''} sur ${total}${p >= 65 ? ' · seuil de 65 % atteint' : ' · sous le seuil de 65 %'}</p><div class="row" style="justify-content:center"><button class="btn primary" id="again">Recommencer</button><a class="btn" href="#${cfg.backHash}">${esc(cfg.backLabel || 'Retour')}</a></div></div>
+    <div class="card" style="text-align:center"><div class="score-big" style="color:${score >= passN ? 'var(--ok)' : 'var(--bad)'}">${p} %</div><p>${score} bonne${score > 1 ? 's' : ''} réponse${score > 1 ? 's' : ''} sur ${total}${score >= passN ? ` · seuil de ${passN}/${total} atteint` : ` · sous le seuil de ${passN}/${total}`}</p><div class="row" style="justify-content:center"><button class="btn primary" id="again">Recommencer</button><a class="btn" href="#${cfg.backHash}">${esc(cfg.backLabel || 'Retour')}</a></div></div>
     ${wrong.length ? `<h3 style="margin-top:22px">Questions à revoir (${wrong.length})</h3>${wrong.map(x => `<div class="card q"><div class="qt">${esc(x.q.text)}</div><p><b>Bonne réponse :</b> ${esc(x.q.choices[x.q.answer])}</p><div class="explain">${esc(x.q.explain)}<br><a href="#sec-${x.q.sec}">Relire : ${esc(SEC_BY_ID[x.q.sec].title)}</a></div></div>`).join('')}` : '<p class="muted" style="margin-top:20px">Sans faute. Bravo !</p>'}</div>`;
     $('#again').addEventListener('click', () => runQuiz(el, cfg));
   };
@@ -2673,7 +2695,7 @@ function renderSettings(el){
   <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Sauvegarder ma progression</h4><p class="muted">Votre progression est enregistrée automatiquement dans ce navigateur. Pour la transférer sur un autre appareil ou la conserver, copiez le code ci-dessous et collez-le sur l'autre appareil.</p><div class="row"><button class="btn primary" id="exp">Générer le code de sauvegarde</button><button class="btn" id="copy" hidden>Copier</button></div><textarea id="expbox" hidden readonly aria-label="Code de sauvegarde"></textarea></div>
   <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Restaurer une progression</h4><textarea id="impbox" placeholder="Collez ici un code de sauvegarde"></textarea><div class="row" style="margin-top:8px"><button class="btn" id="imp">Restaurer</button></div></div>
   <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Réinitialiser</h4><p class="muted">Efface toute la progression (lectures, quiz, examens, cartes). Action irréversible.</p><button class="btn" id="reset" style="border-color:var(--bad);color:var(--bad)">Tout effacer</button><span id="resetc"></span></div>
-  <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Contenu</h4><p class="muted">${SECTIONS.length} sections · ${TRAINER_DECKS.reduce((a, d) => a + d.cards.length, 0)} flashcards du formateur · ${Q.length} QCM d'entraînement · ${EXAMS.length} examens blancs fixes (${EXAMS.reduce((a, e) => a + e.items.length, 0)} questions) · ${TF.length} vrai/faux · ${CARDS.length} flashcards · ${MATCHING.length} exercices d'association · ${GLOSSARY.length} termes. Contenu rédigé à partir des supports « Les pratiques ITIL 5 » et « ITIL V5 Foundation : la démarche » (AFConsulting Group, 2027).</p></div></div>`;
+  <div class="card" style="margin-top:14px"><h4 style="margin-top:0">Contenu</h4><p class="muted">${SECTIONS.length} sections · ${TRAINER_DECKS.reduce((a, d) => a + d.cards.length, 0)} flashcards du formateur · ${TRAINER_QUIZZES.reduce((a, q) => a + q.questions.length, 0)} questions de quiz du formateur · ${Q.length} QCM d'entraînement · ${EXAMS.length} examens blancs fixes (${EXAMS.reduce((a, e) => a + e.items.length, 0)} questions) · ${TF.length} vrai/faux · ${CARDS.length} flashcards · ${MATCHING.length} exercices d'association · ${GLOSSARY.length} termes. Contenu rédigé à partir des supports « Les pratiques ITIL 5 » et « ITIL V5 Foundation : la démarche » (AFConsulting Group, 2027).</p></div></div>`;
   const ib = $('#install'); if (ib) { if (window.__installPrompt) { ib.hidden = false; ib.addEventListener('click', async () => { const p = window.__installPrompt; if (!p) return; p.prompt(); await p.userChoice; window.__installPrompt = null; ib.hidden = true; }); } else if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) { $('#installinfo').textContent = 'Application installée : vous l\'utilisez en mode autonome.'; } else { $('#installinfo').textContent = 'Pour installer : sur Android (Chrome), menu ⋮ puis « Ajouter à l\'écran d\'accueil » ou « Installer l\'application » ; sur iPhone (Safari), bouton Partager puis « Sur l\'écran d\'accueil ».'; } }
   $('#theme').value = S.theme; $('#theme').addEventListener('change', e => { S.theme = e.target.value; save(); applyTheme(); });
   $('#exp').addEventListener('click', () => { const b = $('#expbox'); b.value = btoa(unescape(encodeURIComponent(JSON.stringify(S)))); b.hidden = false; $('#copy').hidden = false; b.select(); });
@@ -2691,15 +2713,18 @@ function deckStats(d){ const r = { review: 0, progress: 0, ok: 0 }; d.cards.forE
 function renderTrainer(el){
   const tot = TRAINER_DECKS.reduce((a, d) => a + d.cards.length, 0);
   const all = { review: 0, progress: 0, ok: 0 }; TRAINER_DECKS.forEach(d => { const st = deckStats(d); for (const k in st) all[k] += st[k]; });
-  el.innerHTML = `<div class="wrap"><div class="eyebrow">Flashcards du formateur</div><h1>Flashcards AFConsulting</h1>
-  <p class="muted">Les ${TRAINER_DECKS.length} jeux de cartes fournis par le formateur (${tot} cartes), avec une réponse modèle rédigée pour chaque question. Comme dans les fichiers Excel, marquez chaque carte <span class="pill bad">À revoir</span> <span class="pill warn">En cours</span> ou <span class="pill ok">Maîtrisée</span> ; avant l'examen, tout doit être maîtrisé.</p>
+  el.innerHTML = `<div class="wrap"><div class="eyebrow">Formateur</div><h1>Quiz et flashcards AFConsulting</h1>
+  <p class="muted">Le quiz d'entraînement et les ${TRAINER_DECKS.length} jeux de cartes fournis par le formateur (${tot} cartes), avec une réponse modèle rédigée pour chaque question. Comme dans les fichiers Excel, marquez chaque carte <span class="pill bad">À revoir</span> <span class="pill warn">En cours</span> ou <span class="pill ok">Maîtrisée</span> ; avant l'examen, tout doit être maîtrisé.</p>
   <div class="grid c3" style="margin-bottom:18px">
     <div class="card stat"><small>Maîtrisées</small><b style="color:var(--ok)">${all.ok}</b><div class="bar"><i class="ok" style="width:${pct(all.ok, tot)}%"></i></div><small>${pct(all.ok, tot)} % des ${tot} cartes</small></div>
     <div class="card stat"><small>En cours</small><b style="color:var(--warn)">${all.progress}</b></div>
     <div class="card stat"><small>À revoir</small><b style="color:var(--bad)">${all.review}</b><a class="btn small" href="#tcards-all-review" style="margin-top:6px;align-self:flex-start">Réviser toutes les cartes à revoir</a></div>
   </div>
+  <h2 style="margin-top:6px">Quiz du formateur</h2>
+  <ul class="list" style="margin-bottom:22px">${TRAINER_QUIZZES.map(tq => { const r = S.tquiz[tq.id]; const n = tq.questions.length; return `<li class="item" style="flex-wrap:wrap"><span class="num">Q</span><span class="t">${esc(tq.title)}<small>${n} questions · durée cible ${tq.duration} min · seuil ${tq.pass}/${n} · ${esc(tq.level)}${r && r.attempts.length ? ` · ${r.attempts.length} passage${r.attempts.length > 1 ? 's' : ''}, meilleur ${Math.max(...r.attempts.map(a => a.score))}/${n}` : ' · jamais passé'}</small></span>${r && r.attempts.length ? `<span class="pill ${r.attempts[r.attempts.length - 1].score >= tq.pass ? 'ok' : 'bad'}">${r.attempts[r.attempts.length - 1].score}/${n}</span>` : ''}<a class="btn primary small" href="#tquiz-${tq.id}">Démarrer</a></li>`; }).join('')}</ul>
+  <h2>Jeux de flashcards</h2>
   <ul class="list">${TRAINER_DECKS.map((d, i) => { const st = deckStats(d); const n = d.cards.length; return `<li class="item" style="flex-wrap:wrap"><span class="num">${i + 1}</span><span class="t">${esc(d.title)}<small>${n} cartes · ${esc(d.file)}</small></span><span style="width:120px;flex:none"><span class="bar" style="display:flex;overflow:hidden"><i class="ok" style="width:${pct(st.ok, n)}%;border-radius:0"></i><i class="warn" style="width:${pct(st.progress, n)}%;border-radius:0"></i></span></span><span class="pill ${st.ok === n ? 'ok' : st.ok ? 'warn' : ''}">${st.ok}/${n}</span><span class="row" style="gap:6px;flex-basis:100%;justify-content:flex-end"><a class="btn small" href="#tdeck-${d.id}">Parcourir avec les réponses</a><a class="btn primary small" href="#tcards-${d.id}">Réviser en cartes</a></span></li>`; }).join('')}</ul>
-  <p class="muted" style="font-size:.82rem;margin-top:14px">Les questions et thématiques sont celles des fichiers du formateur. Les réponses ont été rédigées comme réponses modèles à partir du support de cours et du référentiel ITIL ; certaines cartes (VSM, pensée complexe, SRE, CALMS, SIAM, Shadow AI) vont au-delà du support écrit.</p></div>`;
+  <p class="muted" style="font-size:.82rem;margin-top:14px">Le quiz reprend les questions et choix du document du formateur (le corrigé annoncé n'y figurait pas ; les réponses et explications ont été rédigées à partir du support). Les questions et thématiques des flashcards sont celles des fichiers du formateur. Les réponses ont été rédigées comme réponses modèles à partir du support de cours et du référentiel ITIL ; certaines cartes (VSM, pensée complexe, SRE, CALMS, SIAM, Shadow AI) vont au-delà du support écrit.</p></div>`;
 }
 function renderTrainerDeck(el, id){
   const d = TRAINER_DECKS.find(x => x.id === id); if (!d) return renderTrainer(el);
@@ -2744,6 +2769,11 @@ function renderTrainerCards(el, arg){
   render();
 }
 
+function renderTrainerQuiz(el, id){
+  const tq = TRAINER_QUIZZES.find(x => x.id === id); if (!tq) return renderTrainer(el);
+  const qs = tq.questions.map((q, i) => ({ id: tq.id + '-' + i, sec: q[0], ch: CH_OF_SEC[q[0]], text: q[1], choices: q[2], answer: q[3], explain: q[4] }));
+  runQuiz(el, { title: tq.title, sub: `Quiz du formateur · ${qs.length} questions · durée cible ${tq.duration} min · seuil ${tq.pass}/${qs.length}`, questions: qs, keepOrder: true, passScore: tq.pass, backHash: 'formateur', backLabel: 'Formateur', onDone: (score, total) => { const r = S.tquiz[tq.id] || (S.tquiz[tq.id] = { attempts: [] }); r.attempts.push({ score, total, date: today() }); save(); } });
+}
 /* ---------- démarrage ---------- */
 document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => { if (location.hash === '#' + b.dataset.view) route(); else location.hash = '#' + b.dataset.view; }));
 $('.menu-btn').addEventListener('click', () => $('.side').classList.toggle('open'));
